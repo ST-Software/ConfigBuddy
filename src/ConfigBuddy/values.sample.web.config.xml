@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <parameter key="server" value="mssql" />
+  <parameter key="user" value="administrator" />
+  <parameter key="pass" value="password" />
+</configuration>

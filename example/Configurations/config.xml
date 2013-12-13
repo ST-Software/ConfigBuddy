@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+
+  <parameter key="ConnectionString" value="Data Source=(local)\sqlexpress; Initial Catalog=MyDb;Integrated Security=true"/>
+  
+  <parameter key="Log4NetExtensions">
+    <appender name="RollingFileDebug" type="log4net.Appender.RollingFileAppender">
+      <file value="./../logs/debug_log.txt"/>
+      <appendToFile value="true" />
+      <maximumFileSize value="10000KB" />
+      <maxSizeRollBackups value="20" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%d [%t] %-5p %c [%x] - %m%n" />
+      </layout>
+    </appender>
+    <root>
+      <level value="ALL" />
+    </root>
+  </parameter>
+
+</configuration>
