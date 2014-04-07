@@ -1,5 +1,7 @@
 ﻿using ConfigBuddy.Core;
+using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using Logger = ConfigBuddy.Core.Logger;
 
 namespace ConfigBuddy.Tasks
 {
@@ -7,13 +9,20 @@ namespace ConfigBuddy.Tasks
     {
         public ConfigBudyTransformProjectConfigurations()
         {
-            ConfigExtension = "values.xml";
-            TemplateExtension = "template.xml";
+            ConfigExtension = "config.xml";
+            TemplateExtension = "template";
         }
 
         public override bool Execute()
         {
-            Builder.GenerateConfigsForOneProject(TemplateDir, OutputDir, ConfigDir,
+            Logger.LogAction = (msg, level) =>
+            {
+                if (level == LogLevel.Error) Log.LogError(msg);
+                if (level == LogLevel.Warning) Log.LogWarning(msg);
+                if (level == LogLevel.Debug) Log.LogMessage(MessageImportance.High, msg);
+            };
+
+            ConfigGenerator.ForOneProject(TemplateDir, OutputDir, ConfigDir,
                 TemplateExtension, ConfigExtension, Debug, null, null);
 
             return true;

@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace ConfigBuddy.Core
 {
-    public class Builder
+    public class ConfigGenerator
     {     
 
         public const string DefaultTemplateExntesion = "template";
         public const string DefaultConfigExtension = "values.xml";
         
-        public static void GenerateConfigsForAllProjects(string configDir, string templateDir, string outputDir, string templateOutputSubdir = "", bool cleanOutputDir = false, bool debug = false, string parameters = null, bool flatOutput = false)
+        public static void ForAllProjects(string configDir, string templateDir, string outputDir, string templateOutputSubdir = "", bool cleanOutputDir = false, bool debug = false, string parameters = null, bool flatOutput = false)
         {
             DeleteOutputIf(cleanOutputDir, outputDir);
 
@@ -30,16 +30,16 @@ namespace ConfigBuddy.Core
                     : Path.Combine(outputDir, configDiff, templateOutputSubdir);
 
                 var templatePrefix = flatOutput ? configDiff.Replace(Path.DirectorySeparatorChar, '.') + "." : null;
-                GenerateConfigsForOneProject(templateDir, destDir, configFile, DefaultTemplateExntesion,
+                ForOneProject(templateDir, destDir, configFile, DefaultTemplateExntesion,
                     DefaultConfigExtension, debug, Configuration.FromParams(parameters), templatePrefix);
             }
         }
 
-        public static void GenerateConfigsForOneProject(string templateDir, 
+        public static void ForOneProject(string templateDir, 
                 string outputDir, string configDir, string templateExtension, 
                 string configExtension, bool debug, 
                 Configuration parameters, string templatePrefix = null)
-        {
+        {           
             configDir = ReplaceUserDirInPath(configDir);                        
             var configuration = Configuration.FromPath(null, configDir, configExtension, parameters);
 
@@ -49,6 +49,7 @@ namespace ConfigBuddy.Core
 
             foreach (var template in templates)
             {
+                Logger.Debug("GenerateConfigsForOneProject processing template: {0}", template.Path);
                 var result = template.Run(configuration);
 
                 if (debug) { Console.WriteLine("Config compiled"); }

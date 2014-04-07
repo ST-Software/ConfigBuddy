@@ -9,6 +9,7 @@
     </CompileDependsOn>
   </PropertyGroup>
   
+  
   <ItemGroup>
     <ProjectCapability Include="TypeScript" />
   </ItemGroup>
@@ -19,7 +20,8 @@
     <ConfigBudyTransformProjectConfigurations
       ConfigDir="../Configurations"
       OutputDir=""
-      TemplateDir="ConfigurationTemplates"/>
+      TemplateDir="ConfigurationTemplates"
+      TemplateExtension="xml"/>
 
     <Message Importance="high" Text="TransformProjectConfigurations finished"/>
   </Target>

@@ -78,6 +78,8 @@ namespace ConfigBuddy.Core
 
         public static Configuration FromPath(string configRoot, string configDir, string configExtension, Configuration configOverwrites)
         {
+            Logger.Debug("Configuration.FromPath (configRoot: {0}, configDir: {1}, configExtension: {2})", configRoot, configDir, configExtension);
+
             IList<string> configurationPaths = FileUtils.GetFilesFromPathUp(configRoot, configDir, configExtension);
 
             var configurations = configurationPaths

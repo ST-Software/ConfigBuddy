@@ -15,7 +15,7 @@ namespace ConfigBuddy.Tests
         {
             string valuesDir = Path.Combine(TestUtils.DataDir, "configs");
             string templateDir = Path.Combine(TestUtils.DataDir, "templates", "app1");
-            Builder.GenerateConfigsForAllProjects(valuesDir, templateDir, TestUtils.OutputDir, templateOutputSubdir: "myconfigs", cleanOutputDir: true);
+            ConfigGenerator.ForAllProjects(valuesDir, templateDir, TestUtils.OutputDir, templateOutputSubdir: "myconfigs", cleanOutputDir: true);
 
             string app1Path = Path.Combine(TestUtils.OutputDir, @"project1\configuration1\myconfigs");
             Assert.AreEqual(true, Directory.Exists(app1Path));
@@ -30,7 +30,7 @@ namespace ConfigBuddy.Tests
         {
             string valuesDir = Path.Combine(TestUtils.DataDir, "configs");
             string templateDir = Path.Combine(TestUtils.DataDir, "templates", "app1");
-            Builder.GenerateConfigsForAllProjects(valuesDir, templateDir, TestUtils.OutputDir, templateOutputSubdir: "myconfigs", cleanOutputDir: true, debug: false, parameters: "Param1=value1;Test=testvalue");
+            ConfigGenerator.ForAllProjects(valuesDir, templateDir, TestUtils.OutputDir, templateOutputSubdir: "myconfigs", cleanOutputDir: true, debug: false, parameters: "Param1=value1;Test=testvalue");
 
             string app1Path = Path.Combine(TestUtils.OutputDir, @"project1\configuration1\myconfigs");
             Assert.AreEqual(true, Directory.Exists(app1Path));
@@ -45,7 +45,7 @@ namespace ConfigBuddy.Tests
         {
             string valuesDir = Path.Combine(TestUtils.DataDir, "configs");
             string templateDir = Path.Combine(TestUtils.DataDir, "templates", "app1");
-            Builder.GenerateConfigsForAllProjects(valuesDir, templateDir, TestUtils.OutputDir, templateOutputSubdir: "myconfigs", cleanOutputDir: true, debug: false, parameters: "Param1=value1;Test=testvalue", flatOutput: true);
+            ConfigGenerator.ForAllProjects(valuesDir, templateDir, TestUtils.OutputDir, templateOutputSubdir: "myconfigs", cleanOutputDir: true, debug: false, parameters: "Param1=value1;Test=testvalue", flatOutput: true);
 
             string app1Path = Path.Combine(TestUtils.OutputDir, @"myconfigs");
             Assert.AreEqual(true, Directory.Exists(app1Path));
@@ -74,9 +74,9 @@ namespace ConfigBuddy.Tests
             var directory = new DirectoryInfo(dir);            
             directory.Create();
             File.WriteAllText(path, "");
-            Assert.AreEqual(path, Builder.ReplaceUserDirInPath(Path.Combine(rootDir, "{{userDir}}", "values.txt")));
+            Assert.AreEqual(path, ConfigGenerator.ReplaceUserDirInPath(Path.Combine(rootDir, "{{userDir}}", "values.txt")));
             directory.Delete(true);
-            Assert.AreEqual(rootPath, Builder.ReplaceUserDirInPath(Path.Combine(rootDir, "{{userDir}}", "values.txt")));
+            Assert.AreEqual(rootPath, ConfigGenerator.ReplaceUserDirInPath(Path.Combine(rootDir, "{{userDir}}", "values.txt")));
         }
     }
 }
