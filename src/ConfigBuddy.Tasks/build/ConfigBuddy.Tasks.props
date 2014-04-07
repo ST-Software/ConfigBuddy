@@ -1,0 +1,18 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <CompileDependsOn>
+      TransformProjectConfigurations;
+      $(CompileDependsOn);
+    </CompileDependsOn>
+
+    <ConfigBuddyConfigExtension Condition=" '$(ConfigBuddyConfigExtension)' == ''">xml</ConfigBuddyConfigExtension>
+    <ConfigBuddyTemplateExtension Condition=" '$(ConfigBuddyTemplateExtension)' == ''">template</ConfigBuddyTemplateExtension>
+    <ConfigBuddyOutputDir Condition=" '$(ConfigBuddyOutputDir)' == ''">./</ConfigBuddyOutputDir>
+    <ConfigBuddyTemplateDir Condition=" '$(ConfigBuddyTemplateDir)' == ''">ConfigurationTemplates</ConfigBuddyTemplateDir>
+    <ConfigBuddyConfigDir Condition=" '$(ConfigBuddyConfigDir)' == ''">../Configurations/Development/{{userDir}}</ConfigBuddyConfigDir>
+    <ConfigBuddyConfigRoot Condition=" '$(ConfigBuddyConfigRoot)' == ''">../Configurations</ConfigBuddyConfigRoot>
+
+  </PropertyGroup>
+
+</Project>

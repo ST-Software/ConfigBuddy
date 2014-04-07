@@ -57,7 +57,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder.cs" />
+    <Compile Include="ConfigGenerator.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Template.cs" />

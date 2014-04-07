@@ -79,6 +79,7 @@ namespace ConfigBuddy.Core
         public static Configuration FromPath(string configRoot, string configDir, string configExtension, Configuration configOverwrites)
         {
             Logger.Debug("Configuration.FromPath (configRoot: {0}, configDir: {1}, configExtension: {2})", configRoot, configDir, configExtension);
+            Logger.Debug("Configuration.FromPath - current path {0}", Environment.CurrentDirectory);
 
             IList<string> configurationPaths = FileUtils.GetFilesFromPathUp(configRoot, configDir, configExtension);
 
@@ -91,7 +92,11 @@ namespace ConfigBuddy.Core
                 configurations.Insert(0, configOverwrites);
             }
 
-            return Merge(configurations);
+            var result = Merge(configurations);
+
+            Logger.Debug("Configuration.FromPath - result.Count: {0}", result.Data.Count);
+
+            return result;
         }
 
     }

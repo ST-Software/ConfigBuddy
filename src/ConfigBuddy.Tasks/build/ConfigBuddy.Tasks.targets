@@ -1,12 +1,13 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <UsingTask TaskName="ConfigBudyTransformProjectConfigurations" AssemblyFile="../tools/ConfigBuddy.Tasks.dll" />
+  <UsingTask TaskName="ConfigBuddyTransformProjectConfigurations" AssemblyFile="../tools/ConfigBuddy.Tasks.dll" />
 
   <PropertyGroup>
     <CompileDependsOn>
       TransformProjectConfigurations;
       $(CompileDependsOn);
     </CompileDependsOn>
+
   </PropertyGroup>
   
   
@@ -16,12 +17,14 @@
 
   <Target Name="TransformProjectConfigurations" Condition="'$(TransformProjectConfigurations)' == 'true'">
     <Message Importance="high" Text="TransformProjectConfigurations starting..."/>
-             
-    <ConfigBudyTransformProjectConfigurations
-      ConfigDir="../Configurations"
-      OutputDir=""
-      TemplateDir="ConfigurationTemplates"
-      TemplateExtension="xml"/>
+
+    <ConfigBuddyTransformProjectConfigurations
+      ConfigExtension="$(ConfigBuddyConfigExtension)"
+      TemplateExtension="$(ConfigBuddyTemplateExtension)"
+      OutputDir="$(ConfigBuddyOutputDir)"
+      TemplateDir="$(ConfigBuddyTemplateDir)"
+      ConfigDir="$(ConfigBuddyConfigDir)"
+      ConfigRoot="$(ConfigBuddyConfigRoot)"/>
 
     <Message Importance="high" Text="TransformProjectConfigurations finished"/>
   </Target>

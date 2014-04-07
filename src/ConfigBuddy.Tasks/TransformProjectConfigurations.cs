@@ -5,14 +5,8 @@ using Logger = ConfigBuddy.Core.Logger;
 
 namespace ConfigBuddy.Tasks
 {
-    public class ConfigBudyTransformProjectConfigurations : Task
+    public class ConfigBuddyTransformProjectConfigurations : Task
     {
-        public ConfigBudyTransformProjectConfigurations()
-        {
-            ConfigExtension = "config.xml";
-            TemplateExtension = "template";
-        }
-
         public override bool Execute()
         {
             Logger.LogAction = (msg, level) =>
@@ -22,13 +16,14 @@ namespace ConfigBuddy.Tasks
                 if (level == LogLevel.Debug) Log.LogMessage(MessageImportance.High, msg);
             };
 
-            ConfigGenerator.ForOneProject(TemplateDir, OutputDir, ConfigDir,
+            ConfigGenerator.ForOneProject(TemplateDir, OutputDir, ConfigDir, ConfigRoot,
                 TemplateExtension, ConfigExtension, Debug, null, null);
 
             return true;
         }
 
         public string ConfigDir { get; set; }
+        public string ConfigRoot { get; set; }
         public string OutputDir { get; set; }
         public string TemplateDir { get; set; }
 
