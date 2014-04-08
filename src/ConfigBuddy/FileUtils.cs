@@ -23,7 +23,7 @@ namespace ConfigBuddy.Core
                     stack.Push(directoryInfo.ToString());    
                 }
 
-                if (dir != root)
+                if (dir != root && Directory.Exists(dir))
                 {
                     files.AddRange(Directory.GetFiles(dir, extension != null ? String.Format("*.{0}", extension) : "*.*"));    
                 }

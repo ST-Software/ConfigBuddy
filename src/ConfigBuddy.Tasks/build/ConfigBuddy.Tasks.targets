@@ -1,6 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <UsingTask TaskName="ConfigBuddyTransformProjectConfigurations" AssemblyFile="../tools/ConfigBuddy.Tasks.dll" />
+  <UsingTask TaskName="ConfigBuddyTransformOneProjectConfigurations" AssemblyFile="../tools/ConfigBuddy.Tasks.dll" />
+  <UsingTask TaskName="ConfigBuddyTransformAllProjectConfigurations" AssemblyFile="../tools/ConfigBuddy.Tasks.dll" />
 
   <PropertyGroup>
     <CompileDependsOn>
@@ -18,13 +19,25 @@
   <Target Name="TransformProjectConfigurations" Condition="'$(TransformProjectConfigurations)' == 'true'">
     <Message Importance="high" Text="TransformProjectConfigurations starting..."/>
 
-    <ConfigBuddyTransformProjectConfigurations
+    <!-- Transform current project config files -->
+    <ConfigBuddyTransformOneProjectConfigurations
       ConfigExtension="$(ConfigBuddyConfigExtension)"
       TemplateExtension="$(ConfigBuddyTemplateExtension)"
-      OutputDir="$(ConfigBuddyOutputDir)"
+      OutputDir="$(ConfigBuddyOneProjectSetOutputDir)"
       TemplateDir="$(ConfigBuddyTemplateDir)"
       ConfigDir="$(ConfigBuddyConfigDir)"
-      ConfigRoot="$(ConfigBuddyConfigRoot)"/>
+      ConfigRoot="$(ConfigBuddyConfigRoot)"
+      Debug="$(ConfigBuddyDebug)"/>
+
+    <!-- Transform current project config files for deploy -->
+    <ConfigBuddyTransformAllProjectConfigurations
+      ConfigExtension="$(ConfigBuddyConfigExtension)"
+      TemplateExtension="$(ConfigBuddyTemplateExtension)"
+      OutputDir="$(ConfigBuddyAllProjectSetsOutputDir)"
+      TemplateDir="$(ConfigBuddyTemplateDir)"
+      ConfigRoot="$(ConfigBuddyConfigRoot)"
+      OutputProjectName="$(ProjectName)"
+      Debug="$(ConfigBuddyDebug)"/>
 
     <Message Importance="high" Text="TransformProjectConfigurations finished"/>
   </Target>

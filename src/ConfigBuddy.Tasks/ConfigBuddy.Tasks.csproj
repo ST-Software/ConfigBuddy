@@ -36,7 +36,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TransformProjectConfigurations.cs" />
+    <Compile Include="ConfigBuddyTransformAllProjectConfigurations.cs" />
+    <Compile Include="ConfigBuddyTransformOneProjectConfigurations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,14 +7,18 @@ namespace ConfigBuddy.Core
     public class ConfigGenerator
     {     
 
-        public const string DefaultTemplateExntesion = "template";
-        public const string DefaultConfigExtension = "values.xml";
-        
-        public static void ForAllProjects(string configDir, string templateDir, string outputDir, string templateOutputSubdir = "", bool cleanOutputDir = false, bool debug = false, string parameters = null, bool flatOutput = false)
+
+        public static void ForAllSets(string configDir, string templateDir, string outputDir, 
+            string templateOutputSubdir = "", bool cleanOutputDir = false, bool debug = false, 
+            string parameters = null, bool flatOutput = false,
+            string configExtension = "xml", string templateExtension = "template")
         {
+            Logger.Debug("ForAllSets(configDir: {0}, templateDir: {1}, outputDir: {2}, templateOutputSubdir: {3}, cleanOutputDir: {4}, debug: {5})",
+                configDir, templateDir, outputDir, templateOutputSubdir, cleanOutputDir, debug);
+
             DeleteOutputIf(cleanOutputDir, outputDir);
 
-            var configFiles = FileUtils.FindFilesInLeafDirs(configDir, DefaultConfigExtension);
+            var configFiles = FileUtils.FindFilesInLeafDirs(configDir, configExtension);
 
             foreach (var configFile in configFiles)
             {
@@ -30,17 +34,17 @@ namespace ConfigBuddy.Core
                     : Path.Combine(outputDir, configDiff, templateOutputSubdir);
 
                 var templatePrefix = flatOutput ? configDiff.Replace(Path.DirectorySeparatorChar, '.') + "." : null;
-                ForOneProject(templateDir, destDir, configFile, configPath, DefaultTemplateExntesion,
-                    DefaultConfigExtension, debug, Configuration.FromParams(parameters), templatePrefix);
+                ForOneSet(templateDir, destDir, configFile, configPath, templateExtension,
+                    configExtension, debug, Configuration.FromParams(parameters), templatePrefix);
             }
         }
 
-        public static void ForOneProject(string templateDir, 
+        public static void ForOneSet(string templateDir, 
                 string outputDir, string configDir, string configRoot, string templateExtension, 
                 string configExtension, bool debug, 
                 Configuration parameters, string templatePrefix = null)
         {
-            Logger.Debug("ForOneProject(templateDir: {0}, outputDir: {1}, configDir: {2}, templateExtensions: {3}, configExtensions: {4}, debug: {5})", 
+            Logger.Debug("ForOneSet(templateDir: {0}, outputDir: {1}, configDir: {2}, templateExtensions: {3}, configExtensions: {4}, debug: {5})", 
                 templateDir, outputDir, configDir, templateExtension, configExtension, debug);
 
             configDir = ReplaceUserDirInPath(configDir);                        

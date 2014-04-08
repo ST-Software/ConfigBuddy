@@ -8,10 +8,12 @@
 
     <ConfigBuddyConfigExtension Condition=" '$(ConfigBuddyConfigExtension)' == ''">xml</ConfigBuddyConfigExtension>
     <ConfigBuddyTemplateExtension Condition=" '$(ConfigBuddyTemplateExtension)' == ''">template</ConfigBuddyTemplateExtension>
-    <ConfigBuddyOutputDir Condition=" '$(ConfigBuddyOutputDir)' == ''">./</ConfigBuddyOutputDir>
+    <ConfigBuddyOneProjectSetOutputDir Condition=" '$(ConfigBuddyOneProjectSetOutputDir)' == ''">./</ConfigBuddyOneProjectSetOutputDir>
+    <ConfigBuddyAllProjectSetsOutputDir Condition=" '$(ConfigBuddyAllProjectSetsOutputDir)' == ''">../../bin/configs</ConfigBuddyAllProjectSetsOutputDir>
     <ConfigBuddyTemplateDir Condition=" '$(ConfigBuddyTemplateDir)' == ''">ConfigurationTemplates</ConfigBuddyTemplateDir>
     <ConfigBuddyConfigDir Condition=" '$(ConfigBuddyConfigDir)' == ''">../Configurations/Development/{{userDir}}</ConfigBuddyConfigDir>
     <ConfigBuddyConfigRoot Condition=" '$(ConfigBuddyConfigRoot)' == ''">../Configurations</ConfigBuddyConfigRoot>
+    <ConfigBuddyDebug Condition=" '$(ConfigBuddyDebug)' == ''">true</ConfigBuddyDebug>
 
   </PropertyGroup>
 

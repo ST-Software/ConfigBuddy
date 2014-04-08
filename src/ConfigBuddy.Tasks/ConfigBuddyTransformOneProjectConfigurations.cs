@@ -5,7 +5,7 @@ using Logger = ConfigBuddy.Core.Logger;
 
 namespace ConfigBuddy.Tasks
 {
-    public class ConfigBuddyTransformProjectConfigurations : Task
+    public class ConfigBuddyTransformOneProjectConfigurations : Task
     {
         public override bool Execute()
         {
@@ -16,7 +16,7 @@ namespace ConfigBuddy.Tasks
                 if (level == LogLevel.Debug) Log.LogMessage(MessageImportance.High, msg);
             };
 
-            ConfigGenerator.ForOneProject(TemplateDir, OutputDir, ConfigDir, ConfigRoot,
+            ConfigGenerator.ForOneSet(TemplateDir, OutputDir, ConfigDir, ConfigRoot,
                 TemplateExtension, ConfigExtension, Debug, null, null);
 
             return true;
