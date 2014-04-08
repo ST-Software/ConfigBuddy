@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace ConfigBuddy.Tests
 {
     [TestFixture]
-    public class ConfigTransformerTest
+    public class TemplateTransformerTest
     {
         // ReSharper disable InconsistentNaming
         

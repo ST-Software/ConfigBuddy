@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace ConfigBuddy.Tests
 {
     [TestFixture]
-    public class ConfigurationBuilderTest
+    public class ConfigGeneratorTest
     {
 
         [Test]

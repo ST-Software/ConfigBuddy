@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfigBuddy>
+  <ConfigExtension>config-extension</ConfigExtension>
+  <TemplateExtension>template-extension</TemplateExtension>
+  <TemplateDir>template-dir</TemplateDir>
+  <ConfigDir>config-dir</ConfigDir>
+  <ConfigRoot>config-root</ConfigRoot>
+  <Debug>true</Debug>
+  <OutputDir>output-dir</OutputDir>
+  <Projects>
+    <Project Name="project1-name" Path="project1-path"/>
+    <Project Name="project2-name" Path="project2-path"/>
+  </Projects>
+</ConfigBuddy>

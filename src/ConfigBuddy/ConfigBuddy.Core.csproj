@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="ConfigGenerator.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="GeneratorConfiguration.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="TemplateTransformer.cs" />

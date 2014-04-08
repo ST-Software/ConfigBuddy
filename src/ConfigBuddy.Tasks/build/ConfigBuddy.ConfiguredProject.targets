@@ -29,16 +29,6 @@
       ConfigRoot="$(ConfigBuddyConfigRoot)"
       Debug="$(ConfigBuddyDebug)"/>
 
-    <!-- Transform current project config files for deploy -->
-    <ConfigBuddyTransformAllProjectConfigurations
-      ConfigExtension="$(ConfigBuddyConfigExtension)"
-      TemplateExtension="$(ConfigBuddyTemplateExtension)"
-      OutputDir="$(ConfigBuddyAllProjectSetsOutputDir)"
-      TemplateDir="$(ConfigBuddyTemplateDir)"
-      ConfigRoot="$(ConfigBuddyConfigRoot)"
-      OutputProjectName="$(ProjectName)"
-      Debug="$(ConfigBuddyDebug)"/>
-
     <Message Importance="high" Text="TransformProjectConfigurations finished"/>
   </Target>
 

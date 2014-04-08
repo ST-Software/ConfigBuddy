@@ -51,6 +51,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="configbuddy.project.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="ConfigurationTemplates\App.config.template" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

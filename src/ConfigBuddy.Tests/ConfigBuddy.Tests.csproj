@@ -48,8 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigTransformerTest.cs" />
-    <Compile Include="ConfigurationBuilderTest.cs" />
+    <Compile Include="GeneratorConfigurationTest.cs" />
+    <Compile Include="TemplateTransformerTest.cs" />
+    <Compile Include="ConfigGeneratorTest.cs" />
     <Compile Include="ConfigurationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestUtils.cs" />
@@ -76,6 +77,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data\configbuddy.sets.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="data\configs\project1\configuration1\config.values.xml" />
     <Content Include="data\configs\project1\configuration2\config.values.xml">
       <SubType>Designer</SubType>

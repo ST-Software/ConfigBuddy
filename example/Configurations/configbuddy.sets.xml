@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfigBuddy>
+  <ConfigExtension>xml</ConfigExtension>
+  <TemplateExtension>template</TemplateExtension>
+  <TemplateDir>../../bin/configs</TemplateDir>
+  <ConfigDir>./Development/{{userDir}}</ConfigDir>
+  <ConfigRoot>./</ConfigRoot>
+  <Debug>true</Debug>
+  <OutputDir>$(ProjectOutput)</OutputDir>
+  <Projects>
+    <Project name="consoleapp" path="../consoleapp"/>
+    <Project name="winformapp" path="../winformapp"/>
+  </Projects>
+</ConfigBuddy>

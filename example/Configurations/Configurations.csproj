@@ -49,9 +49,9 @@
     <Folder Include="Test\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="configbuddy.config">
+    <Content Include="configbuddy.sets.xml">
       <SubType>Designer</SubType>
-    </None>
+    </Content>
     <Content Include="config.xml">
       <SubType>Designer</SubType>
     </Content>
