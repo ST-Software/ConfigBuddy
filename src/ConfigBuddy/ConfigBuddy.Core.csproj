@@ -57,6 +57,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\AppVersion.cs" />
     <Compile Include="ConfigGenerator.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Configurations\GeneratorConfiguration.cs" />

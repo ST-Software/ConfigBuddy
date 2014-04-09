@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="ReleaseBuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<!-- The MSBuild Extension Pack need to be installed (http://msbuildextensionpack.com/) -->
+	<Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
+
+	<PropertyGroup>
+		<OutputDir Condition="'$(OutputDir)' == ''">..\bin\</OutputDir>
+		<PublishDir Condition="'$(PublishDir)' == ''">..\publish\</PublishDir>
+		<PublishPackageDir Condition="'$(PublishPackageDir)' == ''">$(PublishDir)packages\</PublishPackageDir>		
+	</PropertyGroup>
+	
+	
+	<!-- Helper Targets -->
+
+	<Target Name="CreateReleaseProperties">
+		<MSBuild.ExtensionPack.Framework.TextString TaskAction="Split" String1="$(AppVersion)" String2=".">
+            <Output ItemName="RelParts" TaskParameter="Strings"/>
+        </MSBuild.ExtensionPack.Framework.TextString>
+    </Target>
+	
+
+	<!-- Clearing Output -->  
+
+	<Target Name="ClearOutput">
+		<Message Text="Removing output directory: $(OutputDir)"/>
+		<RemoveDir Directories="$(OutputDir)" ContinueOnError="true"/>		
+		<MakeDir Directories="$(PublishDir)" ContinueOnError="true"/>
+	</Target>
+	
+
+	<!-- Build -->
+	
+	<PropertyGroup>
+	<BuildDependsOn Condition="'$(BuildDependsOn)' == ''">
+		ClearOutput;
+	</BuildDependsOn>
+	</PropertyGroup>
+	
+	<Target Name="Build" DependsOnTargets="$(BuildDependsOn)">
+		<MSBuild Projects="ConfigBuddy.sln " Properties="Configuration=Release;Platform=Any CPU"/>
+	</Target>
+
+		
+	<!-- Changing AppVersion -->
+
+	<PropertyGroup>
+		<AppVersion  Condition="'$(AppVersion)' == ''">0.0.0</AppVersion>		
+	</PropertyGroup>
+	
+	<Target Name="UpdateAppVersion">
+		<MSBuild.ExtensionPack.FileSystem.File TaskAction="Replace" RegexPattern="\d+.\d+.\d+(.\d+)?" Replacement="$(AppVersion)" Files="ConfigBuddy\Properties\AppVersion.cs"/>		
+	</Target>
+
+	
+	<Target Name="PreparePublish">
+		<RemoveDir Directories="$(PublishDir)" ContinueOnError="true"/>		
+		<MakeDir Directories="$(PublishDir)" ContinueOnError="true"/>
+		<MakeDir Directories="$(PublishPackageDir)" ContinueOnError="true"/>
+	</Target>
+
+
+    <!-- Copy files from output -->
+
+	<Target Name="Publish" DependsOnTargets="PreparePublish">
+	
+        <ItemGroup>
+            <ToolFiles Include="$(OutputDir)\ConfigBuddy.Tasks\*.*"/>
+            <AllSetsFiles Include="ConfigBuddy.Tasks\build\ConfigBuddy.targets;ConfigBuddy.Tasks\build\ConfigBuddy.ConfigurationSets.props"/>
+            <OneSetFiles Include="ConfigBuddy.Tasks\build\ConfigBuddy.targets;ConfigBuddy.Tasks\build\ConfigBuddy.ConfiguredProject.props"/>
+        </ItemGroup>        
+        
+		<Copy SourceFiles="@(ToolFiles)" DestinationFiles="@(ToolFiles -&gt; '$(PublishDir)ConfigBuddy.ConfigurationSets\tools\%(RecursiveDir)%(Filename)%(Extension)')" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="@(AllSetsFiles)" DestinationFiles="@(AllSetsFiles -&gt; '$(PublishDir)ConfigBuddy.ConfigurationSets\build\%(RecursiveDir)%(Filename)%(Extension)')" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="ConfigBuddy.Tasks\ConfigBuddy.ConfigurationSets.nuspec" DestinationFolder="$(PublishDir)ConfigBuddy.ConfigurationSets" OverwriteReadOnlyFiles="True" />
+
+		<Copy SourceFiles="@(ToolFiles)" DestinationFiles="@(ToolFiles -&gt; '$(PublishDir)ConfigBuddy.ConfiguredProject\tools\%(RecursiveDir)%(Filename)%(Extension)')" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="@(OneSetFiles)" DestinationFiles="@(OneSetFiles -&gt; '$(PublishDir)ConfigBuddy.ConfiguredProject\build\%(RecursiveDir)%(Filename)%(Extension)')" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="ConfigBuddy.Tasks\ConfigBuddy.ConfiguredProject.nuspec" DestinationFolder="$(PublishDir)ConfigBuddy.ConfiguredProject" OverwriteReadOnlyFiles="True" />
+
+	</Target>	    
+
+	<Target Name="NugetPacks" DependsOnTargets="Publish">
+		 <Exec WorkingDirectory="$(PublishDir)" Command="NuGet.exe pack &quot;$(PublishDir)ConfigBuddy.ConfigurationSets\ConfigBuddy.ConfigurationSets.nuspec&quot; -Version &quot;$(AppVersion)&quot; -OutputDirectory &quot;packages&quot;"/>  		
+		 <Exec WorkingDirectory="$(PublishDir)" Command="NuGet.exe pack &quot;$(PublishDir)ConfigBuddy.ConfiguredProject\ConfigBuddy.ConfiguredProject.nuspec&quot; -Version &quot;$(AppVersion)&quot; -OutputDirectory &quot;packages&quot;"/>  		
+	</Target>
+
+	<!-- Release Build -->  
+	
+	<PropertyGroup>
+	<ReleaseBuildDependsOn Condition="'$(ReleaseBuildDependsOn)' == ''">
+		UpdateAppVersion;		
+		Build;
+		Publish;
+		NugetPacks;
+	</ReleaseBuildDependsOn>
+	</PropertyGroup>
+	
+	<Target Name="ReleaseBuild" DependsOnTargets="$(ReleaseBuildDependsOn)">
+		<WriteLinesToFile
+				File="$(OutputDir)info.txt"
+				Lines="$(AppVersion)"
+				Overwrite="true"/>
+	</Target>
+	
+	
+</Project>
