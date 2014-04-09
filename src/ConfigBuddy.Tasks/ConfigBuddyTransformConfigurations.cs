@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using ConfigBuddy.Core;
+﻿using ConfigBuddy.Core;
 using ConfigBuddy.Core.Configurations;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -8,7 +6,7 @@ using Logger = ConfigBuddy.Core.Logger;
 
 namespace ConfigBuddy.Tasks
 {
-    public class ConfigBuddyTransformOneProjectConfigurations : Task
+    public class ConfigBuddyTransformConfigurations : Task    
     {
         public override bool Execute()
         {
@@ -21,17 +19,11 @@ namespace ConfigBuddy.Tasks
 
             var config = GeneratorConfiguration.FromFile(ConfigFile);
             config.ApplyProperties(InlineProperties.Parse(Properties));
-
-            var globalConfig = GeneratorConfiguration.FromFile(Path.Combine(config.SetsPath, "configbuddy.sets.xml"));
-            globalConfig.OutputDir = config.OutputDir;
-            globalConfig.ConfigDir = Path.Combine(config.SetsPath, globalConfig.ConfigDir);
-
-            ConfigGenerator.ForOneSet(globalConfig.TemplateDir, globalConfig.OutputDir, globalConfig.ConfigDir, 
-                config.SetsPath, globalConfig.TemplateExtension, globalConfig.ConfigExtension, globalConfig.Debug, null);
-
+            ConfigGenerator.ForAllSets(config);
+            
             return true;
         }
-
+       
         public string ConfigFile { get; set; }
         public string Properties { get; set; }
     }

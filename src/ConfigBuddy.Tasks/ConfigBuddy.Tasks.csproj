@@ -36,18 +36,18 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigBuddyTransformAllProjectConfigurations.cs" />
-    <Compile Include="ConfigBuddyTransformOneProjectConfigurations.cs" />
+    <Compile Include="ConfigBuddyTransformConfigurations.cs" />
+    <Compile Include="ConfigBuddyTransformProject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="build\ConfigBuddy.ConfigurationSets.props" />
-    <None Include="build\ConfigBuddy.ConfiguredProject.props" />
+    <None Include="build\ConfigBuddy.Configurations.props" />
+    <None Include="build\ConfigBuddy.Project.props" />
     <None Include="build\ConfigBuddy.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="ConfigBuddy.ConfigurationSets.nuspec" />
-    <None Include="ConfigBuddy.ConfiguredProject.nuspec" />
+    <None Include="ConfigBuddy.Configurations.nuspec" />
+    <None Include="ConfigBuddy.Project.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfigBuddy\ConfigBuddy.Core.csproj">
@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="content\configbuddy.project.xml" />
-    <Content Include="content\configbuddy.sets.xml">
+    <Content Include="content\configbuddy.configurations.xml">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

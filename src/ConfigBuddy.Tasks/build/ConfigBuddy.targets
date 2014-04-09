@@ -1,42 +1,32 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <UsingTask TaskName="ConfigBuddyTransformAllProjectConfigurations" AssemblyFile="../tools/ConfigBuddy.Tasks.dll" />
-  <UsingTask TaskName="ConfigBuddyTransformOneProjectConfigurations" AssemblyFile="../tools/ConfigBuddy.Tasks.dll" />
+  <UsingTask TaskName="ConfigBuddyTransformConfigurations" AssemblyFile="../tools/ConfigBuddy.Tasks.dll" />
+  <UsingTask TaskName="ConfigBuddyTransformProject" AssemblyFile="../tools/ConfigBuddy.Tasks.dll" />
 
-  <PropertyGroup Condition="'$(ConfigBuddyTransformAllSetsConfigurations)' == 'true'">
+  <PropertyGroup Condition="'$(UseConfigBuddyConfigurations)' == 'true'">
     <CompileDependsOn>
-      TransformAllSetsConfigurations;
+      TransformConfigBuddyConfigurations;
     </CompileDependsOn>
     <SkipCopyBuildProduct>true</SkipCopyBuildProduct>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(ConfigBuddyTransformOneSetConfiguration)' == 'true'">
+  <PropertyGroup Condition="'$(UseConfigBuddyProject)' == 'true'">
     <CompileDependsOn>
-      TransformOneSetConfiguration;
+      TransformConfigBuddyProject;
       $(CompileDependsOn);
     </CompileDependsOn>
   </PropertyGroup>
   
-  <Target Name="TransformAllSetsConfigurations">
-    <Message Importance="high" Text="TransformAllSetsConfigurations starting..."/>
-
-    <!-- Transform current project config files for deploy -->
-    <ConfigBuddyTransformAllProjectConfigurations
-      ConfigFile="$(ProjectDir)ConfigBuddy.sets.xml"
+  <Target Name="TransformConfigBuddyConfigurations">
+    <ConfigBuddyTransformConfigurations
+      ConfigFile="$(ProjectDir)ConfigBuddy.configurations.xml"
       Properties="TargetDir=$(TargetDir);ProjectName=$(ProjectName)"/>
-
-    <Message Importance="high" Text="TransformAllSetsConfigurations finished"/>
   </Target>
 
-  <Target Name="TransformOneSetConfiguration">
-    <Message Importance="high" Text="TransformOneSetConfiguration starting..."/>
-
-    <!-- Transform current project config files -->
-    <ConfigBuddyTransformOneProjectConfigurations
+  <Target Name="TransformConfigBuddyProject">
+    <ConfigBuddyTransformProject
       ConfigFile="$(ProjectDir)ConfigBuddy.project.xml"
       Properties="TargetDir=$(TargetDir);ProjectName=$(ProjectName)"/>
-
-    <Message Importance="high" Text="TransformOneSetConfiguration finished"/>
   </Target>
 
 

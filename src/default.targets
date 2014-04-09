@@ -66,27 +66,27 @@
 	
         <ItemGroup>
             <ToolFiles Include="$(OutputDir)\ConfigBuddy.Core\*.*;$(OutputDir)\ConfigBuddy.Tasks\*.*"/>
-            <AllSetsFiles Include="ConfigBuddy.Tasks\build\ConfigBuddy.targets;ConfigBuddy.Tasks\build\ConfigBuddy.ConfigurationSets.props"/>
-            <OneSetFiles Include="ConfigBuddy.Tasks\build\ConfigBuddy.targets;ConfigBuddy.Tasks\build\ConfigBuddy.ConfiguredProject.props"/>
+            <AllSetsFiles Include="ConfigBuddy.Tasks\build\ConfigBuddy.targets;ConfigBuddy.Tasks\build\ConfigBuddy.Configurations.props"/>
+            <OneSetFiles Include="ConfigBuddy.Tasks\build\ConfigBuddy.targets;ConfigBuddy.Tasks\build\ConfigBuddy.Project.props"/>
         </ItemGroup>        
         
-		<Copy SourceFiles="@(ToolFiles)" DestinationFiles="@(ToolFiles -&gt; '$(PublishDir)ConfigBuddy.ConfigurationSets\tools\%(RecursiveDir)%(Filename)%(Extension)')" OverwriteReadOnlyFiles="True" />
-		<Copy SourceFiles="ConfigBuddy.Tasks\build\ConfigBuddy.targets" DestinationFiles="$(PublishDir)ConfigBuddy.ConfigurationSets\build\ConfigBuddy.ConfigurationSets.targets" OverwriteReadOnlyFiles="True" />
-		<Copy SourceFiles="ConfigBuddy.Tasks\build\ConfigBuddy.ConfigurationSets.props" DestinationFolder="$(PublishDir)ConfigBuddy.ConfigurationSets\build" OverwriteReadOnlyFiles="True" />
-		<Copy SourceFiles="ConfigBuddy.Tasks\ConfigBuddy.ConfigurationSets.nuspec" DestinationFolder="$(PublishDir)ConfigBuddy.ConfigurationSets" OverwriteReadOnlyFiles="True" />
-		<Copy SourceFiles="ConfigBuddy.Tasks\content\configbuddy.sets.xml" DestinationFolder="$(PublishDir)ConfigBuddy.ConfigurationSets\content" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="@(ToolFiles)" DestinationFiles="@(ToolFiles -&gt; '$(PublishDir)ConfigBuddy.Configurations\tools\%(RecursiveDir)%(Filename)%(Extension)')" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="ConfigBuddy.Tasks\build\ConfigBuddy.targets" DestinationFiles="$(PublishDir)ConfigBuddy.Configurations\build\ConfigBuddy.Configurations.targets" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="ConfigBuddy.Tasks\build\ConfigBuddy.Configurations.props" DestinationFolder="$(PublishDir)ConfigBuddy.Configurations\build" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="ConfigBuddy.Tasks\ConfigBuddy.Configurations.nuspec" DestinationFolder="$(PublishDir)ConfigBuddy.Configurations" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="ConfigBuddy.Tasks\content\configbuddy.configurations.xml" DestinationFolder="$(PublishDir)ConfigBuddy.Configurations\content" OverwriteReadOnlyFiles="True" />
 
-		<Copy SourceFiles="@(ToolFiles)" DestinationFiles="@(ToolFiles -&gt; '$(PublishDir)ConfigBuddy.ConfiguredProject\tools\%(RecursiveDir)%(Filename)%(Extension)')" OverwriteReadOnlyFiles="True" />
-		<Copy SourceFiles="ConfigBuddy.Tasks\build\ConfigBuddy.targets" DestinationFiles="$(PublishDir)ConfigBuddy.ConfiguredProject\build\ConfigBuddy.ConfiguredProject.targets" OverwriteReadOnlyFiles="True" />
-		<Copy SourceFiles="ConfigBuddy.Tasks\build\ConfigBuddy.ConfiguredProject.props" DestinationFolder="$(PublishDir)ConfigBuddy.ConfiguredProject\build" OverwriteReadOnlyFiles="True" />
-		<Copy SourceFiles="ConfigBuddy.Tasks\ConfigBuddy.ConfiguredProject.nuspec" DestinationFolder="$(PublishDir)ConfigBuddy.ConfiguredProject" OverwriteReadOnlyFiles="True" />
-		<Copy SourceFiles="ConfigBuddy.Tasks\content\configbuddy.project.xml" DestinationFolder="$(PublishDir)ConfigBuddy.ConfiguredProject\content" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="@(ToolFiles)" DestinationFiles="@(ToolFiles -&gt; '$(PublishDir)ConfigBuddy.Project\tools\%(RecursiveDir)%(Filename)%(Extension)')" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="ConfigBuddy.Tasks\build\ConfigBuddy.targets" DestinationFiles="$(PublishDir)ConfigBuddy.Project\build\ConfigBuddy.Project.targets" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="ConfigBuddy.Tasks\build\ConfigBuddy.Project.props" DestinationFolder="$(PublishDir)ConfigBuddy.Project\build" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="ConfigBuddy.Tasks\ConfigBuddy.Project.nuspec" DestinationFolder="$(PublishDir)ConfigBuddy.Project" OverwriteReadOnlyFiles="True" />
+		<Copy SourceFiles="ConfigBuddy.Tasks\content\configbuddy.project.xml" DestinationFolder="$(PublishDir)ConfigBuddy.Project\content" OverwriteReadOnlyFiles="True" />
 
 	</Target>	    
 
 	<Target Name="NugetPacks" DependsOnTargets="Publish">
-		 <Exec WorkingDirectory="$(PublishDir)" Command="NuGet.exe pack &quot;$(PublishDir)ConfigBuddy.ConfigurationSets\ConfigBuddy.ConfigurationSets.nuspec&quot; -Version &quot;$(AppVersion)&quot; -OutputDirectory &quot;packages&quot;"/>  		
-		 <Exec WorkingDirectory="$(PublishDir)" Command="NuGet.exe pack &quot;$(PublishDir)ConfigBuddy.ConfiguredProject\ConfigBuddy.ConfiguredProject.nuspec&quot; -Version &quot;$(AppVersion)&quot; -OutputDirectory &quot;packages&quot;"/>  		
+		 <Exec WorkingDirectory="$(PublishDir)" Command="NuGet.exe pack &quot;$(PublishDir)ConfigBuddy.Configurations\ConfigBuddy.Configurations.nuspec&quot; -Version &quot;$(AppVersion)&quot; -OutputDirectory &quot;packages&quot;"/>  		
+		 <Exec WorkingDirectory="$(PublishDir)" Command="NuGet.exe pack &quot;$(PublishDir)ConfigBuddy.Project\ConfigBuddy.Project.nuspec&quot; -Version &quot;$(AppVersion)&quot; -OutputDirectory &quot;packages&quot;"/>  		
 	</Target>
 
 	<!-- Release Build -->  

@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <ConfigBuddyTransformOneSetConfiguration>true</ConfigBuddyTransformOneSetConfiguration>
+    <UseConfigBuddyConfigurations>true</UseConfigBuddyConfigurations>
   </PropertyGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>ConfigBuddy.ConfiguredProject</id>
+    <id>ConfigBuddy.Configurations</id>
     <version>0.0.0</version>
     <authors>ST Software</authors>
     <owners>ST Software</owners>
