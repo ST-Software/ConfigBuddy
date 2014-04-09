@@ -1,12 +1,24 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using ConfigBuddy.Core.Configurations;
 
 namespace ConfigBuddy.Core
 {
     public class ConfigGenerator
-    {     
+    {
 
+        public static void ForAllSets(GeneratorConfiguration config)
+        {
+            Logger.Debug("ForAllSets...");
+            foreach (var project in config.Projects)
+            {
+                Logger.Debug("project - Name: {0}, Path: {1}", project.Name, project.Path);
+                var templateDir = Path.Combine(project.Path, config.TemplateDir);
+                ForAllSets(config.ConfigRoot, templateDir, config.OutputDir, project.Name, 
+                    false, config.Debug, null, false, config.ConfigExtension, config.TemplateExtension);
+            }
+        }
 
         public static void ForAllSets(string configDir, string templateDir, string outputDir, 
             string templateOutputSubdir = "", bool cleanOutputDir = false, bool debug = false, 

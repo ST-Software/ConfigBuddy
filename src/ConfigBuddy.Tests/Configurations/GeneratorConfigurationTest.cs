@@ -1,7 +1,8 @@
-﻿using ConfigBuddy.Core;
+﻿using System.Collections.Generic;
+using ConfigBuddy.Core.Configurations;
 using NUnit.Framework;
 
-namespace ConfigBuddy.Tests
+namespace ConfigBuddy.Tests.Configurations
 {
     // ReSharper disable InconsistentNaming
     [TestFixture]
@@ -21,6 +22,21 @@ namespace ConfigBuddy.Tests
             Assert.AreEqual(2, config.Projects.Count);
             Assert.AreEqual("project1-name", config.Projects[0].Name);
             Assert.AreEqual("project1-path", config.Projects[0].Path);
+        }
+
+        [Test]
+        public void Should_apply_property_transformation_for_its_properties()
+        {
+            var config = new GeneratorConfiguration();
+            config.ConfigDir = "aaa";
+            config.ConfigExtension = "$(aaa)";
+            config.ConfigRoot = "aaa $(bbb)";
+
+            var properties = new Dictionary<string, string> {{"aaa", "AAA"}, {"bbb", "BBB"}};
+            config.ApplyProperties(properties);
+            Assert.AreEqual("aaa", config.ConfigDir);
+            Assert.AreEqual("AAA", config.ConfigExtension);
+            Assert.AreEqual("aaa BBB", config.ConfigRoot);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using ConfigBuddy.Core;
+﻿using System;
+using System.IO;
+using ConfigBuddy.Core;
+using ConfigBuddy.Core.Configurations;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Logger = ConfigBuddy.Core.Logger;
@@ -16,19 +19,20 @@ namespace ConfigBuddy.Tasks
                 if (level == LogLevel.Debug) Log.LogMessage(MessageImportance.High, msg);
             };
 
-            ConfigGenerator.ForOneSet(TemplateDir, OutputDir, ConfigDir, ConfigRoot,
-                TemplateExtension, ConfigExtension, Debug, null, null);
+            var config = GeneratorConfiguration.FromFile(ConfigFile);
+            config.ApplyProperties(InlineProperties.Parse(Properties));
+
+            var globalConfig = GeneratorConfiguration.FromFile(Path.Combine(config.SetsPath, "configbuddy.sets.xml"));
+            globalConfig.OutputDir = config.OutputDir;
+            globalConfig.ConfigDir = Path.Combine(config.SetsPath, globalConfig.ConfigDir);
+
+            ConfigGenerator.ForOneSet(globalConfig.TemplateDir, globalConfig.OutputDir, globalConfig.ConfigDir, 
+                config.SetsPath, globalConfig.TemplateExtension, globalConfig.ConfigExtension, globalConfig.Debug, null);
 
             return true;
         }
 
-        public string ConfigDir { get; set; }
-        public string ConfigRoot { get; set; }
-        public string OutputDir { get; set; }
-        public string TemplateDir { get; set; }
-
-        public bool Debug { get; set; }
-        public string ConfigExtension { get; set; }
-        public string TemplateExtension { get; set; }
+        public string ConfigFile { get; set; }
+        public string Properties { get; set; }
     }
 }

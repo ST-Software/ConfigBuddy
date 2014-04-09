@@ -48,7 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeneratorConfigurationTest.cs" />
+    <Compile Include="Configurations\InlinePropertiesTest.cs" />
+    <Compile Include="Configurations\GeneratorConfigurationTest.cs" />
     <Compile Include="TemplateTransformerTest.cs" />
     <Compile Include="ConfigGeneratorTest.cs" />
     <Compile Include="ConfigurationTest.cs" />

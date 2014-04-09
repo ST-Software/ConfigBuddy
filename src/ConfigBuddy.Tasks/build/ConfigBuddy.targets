@@ -1,0 +1,43 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <UsingTask TaskName="ConfigBuddyTransformAllProjectConfigurations" AssemblyFile="../tools/ConfigBuddy.Tasks.dll" />
+  <UsingTask TaskName="ConfigBuddyTransformOneProjectConfigurations" AssemblyFile="../tools/ConfigBuddy.Tasks.dll" />
+
+  <PropertyGroup Condition="'$(ConfigBuddyTransformAllSetsConfigurations)' == 'true'">
+    <CompileDependsOn>
+      TransformAllSetsConfigurations;
+      $(CompileDependsOn);
+    </CompileDependsOn>    
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ConfigBuddyTransformOneSetConfiguration)' == 'true'">
+    <CompileDependsOn>
+      TransformOneSetConfiguration;
+      $(CompileDependsOn);
+    </CompileDependsOn>
+  </PropertyGroup>
+  
+  <Target Name="TransformAllSetsConfigurations">
+    <Message Importance="high" Text="TransformAllSetsConfigurations starting..."/>
+
+    <!-- Transform current project config files for deploy -->
+    <ConfigBuddyTransformAllProjectConfigurations
+      ConfigFile="$(ProjectDir)ConfigBuddy.sets.xml"
+      Properties="TargetDir=$(TargetDir);ProjectName=$(ProjectName)"/>
+
+    <Message Importance="high" Text="TransformAllSetsConfigurations finished"/>
+  </Target>
+
+  <Target Name="TransformOneSetConfiguration">
+    <Message Importance="high" Text="TransformOneSetConfiguration starting..."/>
+
+    <!-- Transform current project config files -->
+    <ConfigBuddyTransformOneProjectConfigurations
+      ConfigFile="$(ProjectDir)ConfigBuddy.project.xml"
+      Properties="TargetDir=$(TargetDir);ProjectName=$(ProjectName)"/>
+
+    <Message Importance="high" Text="TransformOneSetConfiguration finished"/>
+  </Target>
+
+
+</Project>

@@ -2,13 +2,12 @@
 <ConfigBuddy>
   <ConfigExtension>xml</ConfigExtension>
   <TemplateExtension>template</TemplateExtension>
-  <TemplateDir>../../bin/configs</TemplateDir>
+  <TemplateDir>ConfigurationTemplates</TemplateDir>
   <ConfigDir>./Development/{{userDir}}</ConfigDir>
   <ConfigRoot>./</ConfigRoot>
   <Debug>true</Debug>
-  <OutputDir>$(ProjectOutput)</OutputDir>
+  <OutputDir>$(TargetDir)</OutputDir>
   <Projects>
-    <Project name="consoleapp" path="../consoleapp"/>
-    <Project name="winformapp" path="../winformapp"/>
+    <Project Name="consoleapp" Path="../consoleapp"/>
   </Projects>
 </ConfigBuddy>

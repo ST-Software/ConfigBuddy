@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ConfigBuddy>
   <SetsPath>../Configurations</SetsPath>
+  <ConfigDir>./Development/{{userDir}}</ConfigDir>
   <OutputDir>./</OutputDir>
 </ConfigBuddy>
