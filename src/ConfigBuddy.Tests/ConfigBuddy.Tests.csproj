@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Configurations\InlinePropertiesTest.cs" />
     <Compile Include="Configurations\GeneratorConfigurationTest.cs" />
+    <Compile Include="FileUtilsTest.cs" />
     <Compile Include="TemplateTransformerTest.cs" />
     <Compile Include="ConfigGeneratorTest.cs" />
     <Compile Include="ConfigurationTest.cs" />
@@ -81,6 +82,7 @@
     <Content Include="data\configbuddy.sets.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="data\configs\config.values.xml" />
     <Content Include="data\configs\project1\configuration1\config.values.xml" />
     <Content Include="data\configs\project1\configuration2\config.values.xml">
       <SubType>Designer</SubType>

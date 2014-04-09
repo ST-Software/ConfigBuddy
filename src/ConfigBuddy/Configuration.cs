@@ -81,7 +81,7 @@ namespace ConfigBuddy.Core
             Logger.Debug("Configuration.FromPath (configRoot: {0}, configDir: {1}, configExtension: {2})", configRoot, configDir, configExtension);
             Logger.Debug("Configuration.FromPath - current path {0}", Environment.CurrentDirectory);
 
-            IList<string> configurationPaths = FileUtils.GetFilesFromPathUp(configRoot, configDir, configExtension);
+            IList<string> configurationPaths = FileUtils.GetOwnAndParentFiles(configRoot, configDir, configExtension);
 
             var configurations = configurationPaths
                 .Select(FromXmlFile)

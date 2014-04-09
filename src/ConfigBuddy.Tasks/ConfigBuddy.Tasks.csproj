@@ -49,6 +49,7 @@
     </None>
     <None Include="build\ConfigBuddy.targets">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

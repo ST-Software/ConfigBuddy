@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <configuration>
 
-  <parameter key="ConnectionString" value="Data Source=(local)\sqlexpress; Initial Catalog=MyDb;Integrated Security=true"/>
+  <parameter key="ConnectionString" value="Data Source=$(DatabaseServer); Initial Catalog=$(DatabaseName);Integrated Security=true"/>
   
   <parameter key="Log4NetExtensions">
     <appender name="RollingFileDebug" type="log4net.Appender.RollingFileAppender">

@@ -2,6 +2,6 @@
 <configuration>
 
   <parameter key="DatabaseServer" value="DevelopmentServer"/>
-  <parameter key="DatabaseName" value="DevelopmentDb"/>
+  <parameter key="DatabaseName" value="VasekDb"/>
   
 </configuration>

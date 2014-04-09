@@ -6,8 +6,8 @@
   <PropertyGroup Condition="'$(ConfigBuddyTransformAllSetsConfigurations)' == 'true'">
     <CompileDependsOn>
       TransformAllSetsConfigurations;
-      $(CompileDependsOn);
-    </CompileDependsOn>    
+    </CompileDependsOn>
+    <SkipCopyBuildProduct>true</SkipCopyBuildProduct>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(ConfigBuddyTransformOneSetConfiguration)' == 'true'">

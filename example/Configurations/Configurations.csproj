@@ -59,6 +59,9 @@
     <Content Include="Development\config.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Development\vasek.p\config.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Production\config.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

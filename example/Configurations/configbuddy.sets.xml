@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ConfigBuddy>
-  <ConfigExtension>xml</ConfigExtension>
+  <ConfigExtension>config.xml</ConfigExtension>
   <TemplateExtension>template</TemplateExtension>
   <TemplateDir>ConfigurationTemplates</TemplateDir>
   <ConfigDir>./Development/{{userDir}}</ConfigDir>

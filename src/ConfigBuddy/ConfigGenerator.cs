@@ -16,14 +16,13 @@ namespace ConfigBuddy.Core
                 Logger.Debug("project - Name: {0}, Path: {1}", project.Name, project.Path);
                 var templateDir = Path.Combine(project.Path, config.TemplateDir);
                 ForAllSets(config.ConfigRoot, templateDir, config.OutputDir, project.Name, 
-                    false, config.Debug, null, false, config.ConfigExtension, config.TemplateExtension);
+                    false, config.Debug, null, config.ConfigExtension, config.TemplateExtension);
             }
         }
 
         public static void ForAllSets(string configDir, string templateDir, string outputDir, 
             string templateOutputSubdir = "", bool cleanOutputDir = false, bool debug = false, 
-            string parameters = null, bool flatOutput = false,
-            string configExtension = "xml", string templateExtension = "template")
+            string parameters = null, string configExtension = "xml", string templateExtension = "template")
         {
             Logger.Debug("ForAllSets(configDir: {0}, templateDir: {1}, outputDir: {2}, templateOutputSubdir: {3}, cleanOutputDir: {4}, debug: {5})",
                 configDir, templateDir, outputDir, templateOutputSubdir, cleanOutputDir, debug);
@@ -41,13 +40,10 @@ namespace ConfigBuddy.Core
                     configDiff = configDiff.Substring(1, configDiff.Length - 1);
                 }
 
-                string destDir = flatOutput ?
-                    Path.Combine(outputDir, templateOutputSubdir)
-                    : Path.Combine(outputDir, configDiff, templateOutputSubdir);
+                string destDir = Path.Combine(outputDir, configDiff, templateOutputSubdir);
 
-                var templatePrefix = flatOutput ? configDiff.Replace(Path.DirectorySeparatorChar, '.') + "." : null;
-                ForOneSet(templateDir, destDir, configFile, configPath, templateExtension,
-                    configExtension, debug, Configuration.FromParams(parameters), templatePrefix);
+                ForOneSet(templateDir, destDir, configFile, configDir, templateExtension,
+                    configExtension, debug, Configuration.FromParams(parameters));
             }
         }
 
@@ -59,11 +55,22 @@ namespace ConfigBuddy.Core
             Logger.Debug("ForOneSet(templateDir: {0}, outputDir: {1}, configDir: {2}, templateExtensions: {3}, configExtensions: {4}, debug: {5})", 
                 templateDir, outputDir, configDir, templateExtension, configExtension, debug);
 
+            templateDir = Path.GetFullPath(templateDir);
+            outputDir = Path.GetFullPath(outputDir);
+            configDir = Path.GetFullPath(configDir);
+            configRoot = Path.GetFullPath(configRoot);
+            Logger.Debug(@"After transforming to absolute paths:");
+            Logger.Debug(@"templateDir: '{0}'", templateDir);
+            Logger.Debug(@"outputDir: '{0}'", outputDir);
+            Logger.Debug(@"configDir: '{0}'", configDir);
+            Logger.Debug(@"configRoot: '{0}'", configRoot);
+
+            Logger.Debug(@"Replacing {{userDir}} with '" + Environment.UserName + "'");
             configDir = ReplaceUserDirInPath(configDir);                        
             var configuration = Configuration.FromPath(configRoot, configDir, configExtension, parameters);
 
             var templates = FileUtils
-                .GetFilesFromPathDown(templateDir, templateExtension)
+                .GetOwnAndChildrenFiles(templateDir, templateExtension)
                 .Select(Template.FromFile);
 
             foreach (var template in templates)
@@ -108,9 +115,11 @@ namespace ConfigBuddy.Core
             {
                 string newPath =
                     configurationsPath.Replace(userDir, Environment.UserName).Replace(@"\\", @"\").Replace("//", "/");
-                if (!File.Exists(newPath))
+                Logger.Debug("Replaced path: {0}", newPath);
+                if (!Directory.Exists(newPath))
                 {
                     newPath = configurationsPath.Replace(userDir, String.Empty).Replace(@"\\", @"\").Replace("//", "/");
+                    Logger.Debug("New path not found, non user path used instead: {0}", newPath);
                 }
                 configurationsPath = newPath;
             }

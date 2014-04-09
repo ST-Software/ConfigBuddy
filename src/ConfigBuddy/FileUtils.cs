@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ConfigBuddy.Core
 {
     public static class FileUtils
     {
-        public static List<string> GetFilesFromPathUp(string root, string path, string extension)
+        public static List<string> GetOwnAndParentFiles(string root, string path, string extension)
         {
             var files = new List<string>();
             var stack = new Stack<string>();
@@ -23,15 +24,19 @@ namespace ConfigBuddy.Core
                     stack.Push(directoryInfo.ToString());    
                 }
 
-                if (dir != root && Directory.Exists(dir))
+                if (Directory.Exists(dir))
                 {
-                    files.AddRange(Directory.GetFiles(dir, extension != null ? String.Format("*.{0}", extension) : "*.*"));    
+                    files.AddRange(Directory.GetFiles(dir).FilterExtensions(extension));
+                }
+                if (dir == root)
+                {
+                    break;
                 }
             }
             return files;
         }
 
-        public static List<string> GetFilesFromPathDown(string path, string extension)
+        public static List<string> GetOwnAndChildrenFiles(string path, string extension)
         {
             var files = new List<string>();
             var stack = new Stack<string>();
@@ -42,7 +47,7 @@ namespace ConfigBuddy.Core
             {
                 string dir = stack.Pop();
                 
-                files.AddRange(Directory.GetFiles(dir, extension != null ? String.Format("*.{0}", extension) : "*.*"));    
+                files.AddRange(Directory.GetFiles(dir).FilterExtensions(extension));    
 
                 foreach (string dn in Directory.GetDirectories(dir))
                 {
@@ -59,7 +64,7 @@ namespace ConfigBuddy.Core
             var directories = Directory.GetDirectories(valuesDir);
             if (directories.Length == 0)
             {
-                result.AddRange(Directory.GetFiles(valuesDir, "*." + extension));
+                result.AddRange(Directory.GetFiles(valuesDir).FilterExtensions(extension));
             }
             else
             {
@@ -79,6 +84,18 @@ namespace ConfigBuddy.Core
                 destination.Directory.Create();
             }
             File.WriteAllText(destination.FullName, compilationResult);
+        }
+
+        public static List<string> FilterExtensions(this IEnumerable<string> list, string extension)
+        {
+            if (String.IsNullOrWhiteSpace(extension))
+            {
+                return list.ToList();
+            }
+            extension = extension.ToLowerInvariant();
+            return list
+                .Where(i => i.ToLowerInvariant().EndsWith(extension))
+                .ToList();
         }
     }
 }
