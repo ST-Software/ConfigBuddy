@@ -46,12 +46,21 @@
     <None Include="build\ConfigBuddy.targets">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ConfigBuddy.ConfigurationSets.nuspec" />
+    <None Include="ConfigBuddy.ConfiguredProject.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfigBuddy\ConfigBuddy.Core.csproj">
       <Project>{1B67A94C-535D-417A-8268-AF5066031246}</Project>
       <Name>ConfigBuddy.Core</Name>
+      <Private>True</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\configbuddy.project.xml" />
+    <Content Include="content\configbuddy.sets.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -9,6 +9,6 @@
   <OutputDir>$(TargetDir)</OutputDir>
   <Projects>
     <!-- Add your projects - this has to be done manually -->
-    <Project Name="consoleapp" Path="../consoleapp"/>
+    <!--<Project Name="consoleapp" Path="../consoleapp"/>-->
   </Projects>
 </ConfigBuddy>

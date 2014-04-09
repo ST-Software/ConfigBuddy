@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\ConfigBuddy.ConfigurationSets.1.0.0\build\ConfigBuddy.ConfigurationSets.props" Condition="Exists('..\packages\ConfigBuddy.ConfigurationSets.1.0.0\build\ConfigBuddy.ConfigurationSets.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <Import Project="../../bin/ConfigBuddy.Tasks\build\ConfigBuddy.ConfigurationSets.props" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -50,10 +50,10 @@
     <Folder Include="Test\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="configbuddy.sets.xml">
+    <Content Include="config.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="config.xml">
+    <Content Include="configbuddy.sets.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Development\config.xml">
@@ -64,8 +64,11 @@
     </Content>
     <Content Include="Production\config.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="../../bin/ConfigBuddy.Tasks\build\ConfigBuddy.targets" />
+  <Import Project="..\packages\ConfigBuddy.ConfigurationSets.1.0.0\build\ConfigBuddy.ConfigurationSets.targets" Condition="Exists('..\packages\ConfigBuddy.ConfigurationSets.1.0.0\build\ConfigBuddy.ConfigurationSets.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
