@@ -3,15 +3,16 @@
   <metadata>
     <id>ConfigBuddy.Configurations</id>
     <version>0.0.0</version>
+    <title>ConfigBuddy.Configurations</title>
     <authors>ST Software</authors>
     <owners>ST Software</owners>
-    <licenseUrl>https://github.com/ST-Software/ConfigBuddy</licenseUrl>
+    <licenseUrl>https://github.com/ST-Software/ConfigBuddy/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>https://github.com/ST-Software/ConfigBuddy</projectUrl>
     <iconUrl>https://github.com/ST-Software/ConfigBuddy</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Package for managing configurations</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright 2014</copyright>
+    <copyright>Copyright ST Software s.r.o. 2014</copyright>
     <tags></tags>
     <dependencies>
     </dependencies>

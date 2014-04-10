@@ -5,4 +5,4 @@ goto :build
   call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86
 
 :build
-msbuild default.targets /t:ReleaseBuild
+msbuild default.targets /t:ReleaseBuild /p:AppVersion=1.0.1
