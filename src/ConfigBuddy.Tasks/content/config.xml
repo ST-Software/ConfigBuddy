@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+
+    <parameter key="DatabaseServer" value="mydbserver"/>
+    <parameter key="DatabaseName" value="mydb"/>
+    <parameter key="ConnectionString" value="Data Source=$(DatabaseServer); Initial Catalog=$(DatabaseName);Integrated Security=true"/>  
+
+</configuration>

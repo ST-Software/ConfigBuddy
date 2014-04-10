@@ -3,7 +3,7 @@
   <ConfigExtension>config.xml</ConfigExtension>
   <TemplateExtension>template</TemplateExtension>
   <TemplateDir>ConfigurationTemplates</TemplateDir>
-  <ConfigDir>./Development/{{userDir}}</ConfigDir>
+  <ConfigDir>./Local/{{userDir}}</ConfigDir>
   <ConfigRoot>./</ConfigRoot>
   <Debug>true</Debug>
   <OutputDir>$(TargetDir)</OutputDir>
