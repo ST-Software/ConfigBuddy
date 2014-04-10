@@ -61,6 +61,7 @@
     <Content Include="content\configbuddy.configurations.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="content\ConfigurationTemplates\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
